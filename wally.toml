@@ -1,10 +1,8 @@
 [package]
-name = "marti/template-roblox-project"
-version = "0.1.0"
+name = "taylorsrus/sound-manager"
+description = "Simple manager for sounds on Roblox."
+version = "1.0.0"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
-private = true
 
 [dependencies]
-Fusion = "elttob/fusion@0.3.0"
-UILabs = "pepeeltoro41/ui-labs@2.3.8"

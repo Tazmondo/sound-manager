@@ -3,6 +3,6 @@
 registry = "test"
 
 [[package]]
-name = "marti/template-roblox-project"
-version = "0.1.0"
+name = "taylorsrus/sound-manager"
+version = "1.0.0"
 dependencies = []
