@@ -1,0 +1,10 @@
+[package]
+name = "marti/template-roblox-project"
+version = "0.1.0"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+private = true
+
+[dependencies]
+Fusion = "elttob/fusion@0.3.0"
+UILabs = "pepeeltoro41/ui-labs@2.3.8"
