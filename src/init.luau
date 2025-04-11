@@ -1,3 +1,4 @@
+local RunService = game:GetService("RunService")
 local SoundService = game:GetService("SoundService")
 local TweenService = game:GetService("TweenService")
 
@@ -86,23 +87,26 @@ end
 local function ProcessSound(reference: Sound, data: Data)
 	local sound = reference:Clone()
 
-	ApplyProperties(sound, data)
-	sound.Ended:Once(function()
-		if data.OnEnded then task.defer(data.OnEnded) end
-		if data.CleanUp ~= false then sound:Destroy() end
-	end)
+	-- since this could be called by UI in story plugins
+	if RunService:IsRunning() then
+		ApplyProperties(sound, data)
+		sound.Ended:Once(function()
+			if data.OnEnded then task.defer(data.OnEnded) end
+			if data.CleanUp ~= false then sound:Destroy() end
+		end)
 
-	if data.FadeIn then
-		local cachedVolume = sound.Volume
-		sound.Volume = 0
+		if data.FadeIn then
+			local cachedVolume = sound.Volume
+			sound.Volume = 0
 
-		local fadeIn = TweenService:Create(sound, TweenInfo.new(data.FadeIn), { Volume = cachedVolume })
-		fadeIn:Play()
+			local fadeIn = TweenService:Create(sound, TweenInfo.new(data.FadeIn), { Volume = cachedVolume })
+			fadeIn:Play()
+		end
+		if data.FadeOut then task.delay(sound.TimeLength - data.FadeOut, function() TweenService:Create(sound, TweenInfo.new(data.FadeOut), { Volume = 0 }):Play() end) end
+
+		sound.Parent = if data.Parent then data.Parent else SoundService
+		sound:Play()
 	end
-	if data.FadeOut then task.delay(sound.TimeLength - data.FadeOut, function() TweenService:Create(sound, TweenInfo.new(data.FadeOut), { Volume = 0 }):Play() end) end
-
-	sound.Parent = if data.Parent then data.Parent else SoundService
-	sound:Play()
 
 	return sound
 end
