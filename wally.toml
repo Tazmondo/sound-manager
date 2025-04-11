@@ -1,7 +1,7 @@
 [package]
 name = "taylorsrus/sound-manager"
 description = "Simple manager for sounds on Roblox."
-version = "1.0.0"
+version = "1.0.1"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
